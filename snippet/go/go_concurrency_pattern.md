@@ -1,14 +1,7 @@
-[*back to contents*](https://github.com/zifengyu/notebook#contents)<br>
-
 # Go: Concurrency Patterns
-- [Runner](#runner)
-- [Pool](#pool)
-- [Worker](#worker)
 
-[↑ top](#go-concurrency-patterns)
-<br><br><br><br><hr>
+### Runner
 
-#### `Runner`
 Runner模式启动goroutine执行一系列tasks，等待任务完成或者在timeout或者系统中断时停止。
 ```go
 // Runner runs a set of tasks within a given timeout and can be shut down on an operating system interrupt.
@@ -98,10 +91,8 @@ func (r *Runner) gotInterrupt() bool {
 }
 ```
 
-[↑ top](#go-concurrency-patterns)
-<br><br><br><br><hr>
+### Pool
 
-#### `Pool`
 Pool模式管理资源池，供多个goroutine使用。池中资源不足时，通过factory创建新资源。Pool关闭时Close资源。
 
 获取资源时，通过`r, ok := <-p.resources`判断池中是否有资源
@@ -192,10 +183,10 @@ func (p *Pool) Close() {
 	}
 }
 ```
-[↑ top](#go-concurrency-patterns)
-<br><br><br><br><hr>
 
-#### `Worker`
+
+### Worker
+
 Worker建立一个unbuffer的channel，启动多个goroutine worker消费（执行）发送到channel的任务。往channel添加任务时会阻塞，直到确保任务被某个goroutine获取执行。
 
 channel关闭时，会等待所有worker结束。
@@ -242,5 +233,3 @@ func (p *Pool) Shutdown() {
 }
 ```
 
-[↑ top](#go-concurrency-patterns)
-<br><br><br><br><hr>
