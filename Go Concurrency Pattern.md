@@ -1,3 +1,5 @@
+#snippet
+
 # Go: Concurrency Patterns
 
 ### Runner

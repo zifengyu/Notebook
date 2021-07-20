@@ -23,3 +23,9 @@ sw-cli dispatch-events --token 'a940a882-7e6b-4908-b5b2-b233ea51f2ce' --event-se
 
 
 
+
+
+GOOS=linux go build -mod=readonly -o ./kafka-connector cmd/kafka-connector/main.go
+
+./kafka-connector -b kafka-dev.kafka.svc.cluster.local:9092 --topic test1 --datatype json --eventset alantest
+
